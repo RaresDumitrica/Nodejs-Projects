@@ -1,0 +1,14 @@
+{
+  "name": "base-rest-api",
+  "version": "1.0.0",
+  "description": "A basic Rest API with \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DEST\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Rares Dumitrica",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
