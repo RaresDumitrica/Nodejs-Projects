@@ -6,9 +6,9 @@
 ```
 1. node .
 ```
-'''
+```
 2. Open postman/insomnia and test the routes 
-''
+```
 
 ## Current routes:
  
