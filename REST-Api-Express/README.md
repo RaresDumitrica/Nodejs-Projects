@@ -11,9 +11,11 @@
 ```
 
 ## Current routes:
- 
+ ```
  GET:
  /shirts 
-
+ ```
+```
  POST:
  /shirts/:id {the logo of the ticket is mandatory}
+ ```
