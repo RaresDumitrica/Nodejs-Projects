@@ -1,0 +1,13 @@
+```
+Comenzi pentru animale:
+    #mesajul-zilei - Pentru un mesaj plin de dragoste
+    #members - Afla cate cancer animaluri sunt pe server
+    #join - Invoca-l pe Jeff pe voice
+    #leave - Da-l in mortii lui pe JeffBot de pe voice
+    #maimuta - Sunetul orgasmic pe care il facee tovarasii cand fute 
+    #prost - Notificati prieteni cu ce animale joci 
+    #play - Jeff vine si ti canta o melodie la alegerea ta 
+    #queue - Jeff iti arata ce vine la lautari
+    #stop - Jeff se opreste din cantat si pleaca
+    #av - Jeff iti arata avatarul crush-ului caruia i-ai dat tag
+```

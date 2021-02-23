@@ -1,0 +1,80 @@
+if(command === 'play') {
+        let youtubeRegExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
+        
+        
+        let query = await args;
+        console.log(args)
+        if(!query[0]) {
+            return message.channel.send("You need to provide an URL");
+        }
+
+        let VC = message.member.voice.channel;
+        if(!VC) {
+            return message.channel.send("You need to be in a Voice channel");
+        }
+
+        let inVC = client.user.voice && client.user.voice.channel;
+        if(inVC) {
+            return message.channel.send("Arleady playing somewhere else");
+        }
+
+        if(query.toString().match(youtubeRegExp)) {
+            musicQueue.push(query.toString());
+            console.log(musicQueue);
+            if(!musicConn) {
+                message.member.voice.channel.join().then((conn) => {
+                    musicConn = conn;
+                    musicChannel = message.channel;
+                    playNextSong();
+                })
+            }
+        }
+        else {
+            let embed = new Discord.MessageEmbed()
+            .setColor("#73ffdc")
+            .setDescription("Please select one of the videos")
+            .setTitle("Jeff Music");
+            let embedMsg = await message.channel.send(embed);
+            let filter = m => m.author.id === message.author.id;
+            let results = await search(query.join(' '), opts).catch(err => console.log(err));
+            console.log(results);
+            console.log("Aici:" + query.join(' '));
+            if(results) {
+                let youtubeResults = results.results;
+                let i = 0;
+                let titles = youtubeResults.map(result => {
+                    i++;
+                    return i + ") " + result.title;
+                });
+                console.log(titles);
+                message.channel.send({
+                    embed: {
+                        title: 'Select which song you want by typing the number',
+                        description: titles.join("\n")
+                    }
+                }).catch(err => console.log(err));
+                
+                filter = m => (m.author.id === message.author.id) && m.content >= 1 && m.content <= youtubeResults.length;
+                let collected = await message.channel.awaitMessages(filter, {max: 1});
+                let selected = youtubeResults[collected.first().content - 1];
+
+                musicQueue.push(selected.link);
+                console.log(musicQueue);
+                if(!musicConn) {
+                    message.member.voice.channel.join().then((conn) => {
+                        musicConn = conn;
+                        musicChannel = message.channel;
+                        playNextSong();
+                    })
+                }
+
+                embed = new Discord.MessageEmbed()
+                    .setTitle(`${selected.title}`)
+                    .setURL(`${selected.link}`)
+                    .setDescription(`${selected.description}`)
+                    .setThumbnail(`${selected.thumbnails.default.url}`);
+
+                message.channel.send(embed);
+            }
+        }
+    }
